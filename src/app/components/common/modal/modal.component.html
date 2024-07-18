@@ -1,0 +1,45 @@
+
+<!-- <p>Data passed to this dialog: {{ data.message }}</p> -->
+
+
+<mat-dialog-content id="Taskconfirm">
+    
+<!-- <h4>Ask for Task Confirmation</h4> -->
+    <div class="row">
+        <div class="card-body">
+            <div class="form-group" *ngIf="userType == 'Admin' || userType == 'PM'">
+                <label>Sales Person</label>
+                <ng-multiselect-dropdown [placeholder]="'Select Sales Person'"
+                    [settings]="dropdownSalesSettings" [data]="salesList" 
+                    [(ngModel)]="salesarray">
+                </ng-multiselect-dropdown>
+            </div>
+        
+            <div class="form-group" *ngIf="userType == 'TM'">
+                <label>Project Manager</label>
+                <ng-multiselect-dropdown [placeholder]="'Select'"
+                    [settings]="dropdownProjectManagerSettings" [data]="projectManagerList" 
+                    [(ngModel)]="projectmanagerarray">
+                </ng-multiselect-dropdown>
+            </div>
+
+            <div class="form-group" *ngIf="userType == 'TL'">
+                <label>Team Managers</label>
+                <ng-multiselect-dropdown [placeholder]="'Select Team Managers'"
+                    [settings]="dropdownTeamManagerSettings" [data]="teamManagerList" 
+                    [(ngModel)]="teamManagerarray">
+                </ng-multiselect-dropdown>
+            </div>
+          
+            <br/>
+            <!-- <button class="btn btn-success" type="submit" (click)="sendConfirmation()" *ngIf="taskconfirm">Submit</button> -->
+            <button class="btn btn-success" type="submit" (click)="submitExtension()" *ngIf="submitextension">Submit Extension</button>
+        </div>
+    </div>
+</mat-dialog-content>
+
+
+
+
+
+

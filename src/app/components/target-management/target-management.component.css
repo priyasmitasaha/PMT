@@ -1,0 +1,13 @@
+.select_month{
+    color: black;
+    border: none;
+    width: 20%;
+    background: transparent;
+    /* background-image: url(data:image/svg+xml;charset=utf-8,<svg width='6' height='4' fill='none' xmlns='http:%2F%2Fwww.w3.org/2000/svg'>
+    <path d='M1 1l4 4 4-4' stroke='white' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'/></svg>); */
+}
+.form-select:focus {
+    border-color: none;
+    outline: 0;
+    box-shadow: none;
+}

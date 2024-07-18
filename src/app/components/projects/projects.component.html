@@ -1,0 +1,136 @@
+
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">                            
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-chart-line light_green"></i> <span class="light_green"> progress of the task</span>
+                            </div>
+                        </div>
+                       
+                    </div> 
+                </div>
+                <div class="task_performance_div">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="on_track_div">
+                                <h3 >This goal is <span>on track</span></h3>
+                                <p class="btn btn-outline-light text-capitalize">mark progress</p>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar light_green" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% / 100%</div>
+                            </div>   
+                            <div class="connected_people_div">
+                                <i class="fa-solid fa-people-group"></i><span> Connected Collaborators</span>
+                                <ul class="connected_people_ul mt-3">
+                                    <li class="connected_people_li">
+                                        <ul class="collabs_ul connected_collabs">
+                                            <li>Quality Analyst</li>
+                                            <li class="right_progress_li">
+                                                <div class="div_100"></div>
+                                                <small>100%</small>
+                                                <img src="assets/images/tab-img6.png" alt="" loading="lazy">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="connected_people_li">
+                                        <ul class="collabs_ul connected_collabs">
+                                            <li>team leader</li>
+                                            <li class="right_progress_li">
+                                                <div class="div_100"></div>
+                                                <small>100%</small>
+                                                <img src="assets/images/tab-img5.png" alt="" loading="lazy">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="connected_people_li">
+                                        <ul class="collabs_ul connected_collabs">
+                                            <li>Expert</li>
+                                            <li class="right_progress_li">
+                                                <div class="div_100"></div>
+                                                <small>100%</small>
+                                                <img src="assets/images/tab-img6.png" alt="" loading="lazy">
+                                            </li>
+                                        </ul>
+                                    </li>  
+                                </ul>  
+                            </div>  
+                                
+                                         
+                        </div>
+                        <div class="col-md-5">
+                            <div class="about_the_task_div">
+                                <div class="about_task_top">
+                                    <h5 class="about_task">about this task</h5>
+                                    <div class="task_id">
+                                        <i class="fa-solid fa-file-lines"></i>
+                                        <p class="mb-0"><a (click)="goToTask(taskId);">{{taskId}}</a></p>
+                                    </div>
+                                    <h5 class="about_task">Collaborators</h5>
+                                    <ul class="collabs_ul" *ngFor="let item of pmCollabs;let i=index;">
+                                        <li><img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg" loading="lazy"></li>
+                                        <li><img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;"></li>
+                                        <li>
+                                            <h5>{{item.firstName}}</h5>
+                                            <p class="mb-0" *ngIf="item.userType == 'PM'">Project Manager</p>
+                                        </li>
+                                    </ul>
+                                    <ul class="collabs_ul" *ngFor="let item of tmCollabs;let i=index;">
+                                        <li><img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg" loading="lazy"></li>
+                                        <li><img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;"></li>
+                                        <li>
+                                            <h5>{{item.firstName}}</h5>
+                                            <p class="mb-0" *ngIf="item.userType == 'TM'">Team Manager</p>
+                                        </li>
+                                    </ul>     
+                                    <ul class="collabs_ul" *ngFor="let item of tlCollabs;let i=index;">
+                                        <li><img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg" loading="lazy"></li>
+                                        <li><img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;"></li>
+                                        <li>
+                                            <h5>{{item.firstName}}</h5>
+                                            <p class="mb-0" *ngIf="item.userType == 'TL'">Team Leader</p>
+                                        </li>
+                                    </ul>     
+                                    <ul class="collabs_ul" *ngFor="let item of qaCollabs;let i=index;">
+                                        <li><img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg" loading="lazy"></li>
+                                        <li><img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;"></li>
+                                        <li>
+                                            <h5>{{item.firstName}}</h5>
+                                            <p class="mb-0" *ngIf="item.userType == 'QA'">Quality Analyst</p>
+                                        </li>
+                                    </ul>   
+                                    <ul class="collabs_ul" *ngFor="let item of expertCollabs;let i=index;">
+                                        <li><img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg" loading="lazy"></li>
+                                        <li><img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;"></li>
+                                        <li>
+                                            <h5>{{item.firstName}}</h5>
+                                            <p class="mb-0" *ngIf="item.userType == 'SSME' || item.userType == 'SME' || item.userType == 'JSME' || item.userType == 'ATL'">Expert</p>
+                                        </li>
+                                    </ul>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </section>
+
+
+
+    </main>
+</section>
+
+
+
+
+
+

@@ -1,0 +1,147 @@
+@media (max-width: 991.98px) {
+    .header {
+        gap: 20px;
+    }
+
+    .header_right {
+        width: 100%;
+        display: block;
+    }
+
+    .header_search {
+        max-width: 100%;
+    }
+
+    .admin_area {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .task_listbar  li{
+        font-size: 14px !important;
+    }
+    .task_listbar::after{
+        width: 1px !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    header.header.sticky {
+        position: fixed;
+        top: 0;
+        z-index: 9999;
+        background: var(--dark);
+        width: 100%;
+        left: 0;
+    }
+    .sidebar_close {
+        right: 0;
+        color: var(--white);
+        font-size: 20px;
+        position: absolute;
+        top: 0;
+        z-index: 999;
+    }
+    .menu_bar.close .line {
+        background: var(--white);
+    }
+    .menu_bar .line::before {
+        top: -8px;
+        width: 24px;
+    }
+    .menu_bar .line::after {
+        bottom: -8px;
+        width: 20px;
+    }
+    .sidebar_header .logo img {
+        width: 70%;
+    }
+    .sidebar {
+        left: -280px;
+    }
+    .sidebar_footer {
+        width: 200px;
+    }
+    .sidebar.active {
+        left: 0;
+        z-index: 99999;
+        width: 200px;
+    }
+    main.main_content.active {
+        margin-left: 0;
+    }
+    .task_listbar ul li {
+        font-size: 14px;
+        padding-right: 8px;
+    }
+    .task_listbar ul li:not(:last-child) {
+        margin-right: 3px;
+    }
+    .nav_menu ul li a {
+        font-size: 12px;
+        padding: 5px 0;
+    }
+    .page_content {
+        padding: 20px 0;
+    }
+    .main_content {
+        margin-left: 0;
+    }
+    .invite_heading {
+        max-width: 100%;
+        display: block;
+    }
+    .invite_filter {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .invite_box {
+        padding: 30px 20px;
+    }
+    .customize_tab {
+        display: inline-table;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .menu_bar.close .line::before {
+        top: -9px;
+        width: 20px;
+        transform: rotate(0deg);
+        left: 0;
+    }
+    .menu_bar.close .line::after {
+        bottom: -8px;
+        width: 20px;
+        transform: rotate(360deg);
+        left: 0;
+    }
+    .sidebar_close {
+        display: block;
+    }
+    .checkbox-label {
+        background-color: #111;
+        width: 55px;
+        height: 25px;
+    }
+    .checkbox-label .ball {
+        background-color: #fff;
+        width: 20px;
+        height: 20px;
+        left: 4px;
+        top: 2px;
+    }
+    .sidebar_close {
+        display: block;
+        position: absolute;
+        top: -8px;
+    }
+    .sidebar_header {
+        padding: 25px 20px;
+    }
+
+}

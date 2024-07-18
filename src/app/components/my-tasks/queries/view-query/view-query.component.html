@@ -1,0 +1,74 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-clipboard-question light_green"></i> 
+                                <span class="light_green">view queries of Task ID {{taskID}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <ul class="top_left_heading_ul">
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="query_solution_div">
+                    <div class="qry_div">
+                        <h3>Query</h3>
+                        <h5>
+                            {{query}}
+                        </h5>
+                        <div class="upload_section">
+                            <div class="screenshot_div">
+                                <div class="upload_doc" style="position: relative;display: flex;gap:20px;" *ngFor="let q of queryDocs;">
+                                    <div class="img_thumbnails">
+                                    <img *ngIf="q.length > 0"  class="assignImg"
+                                        [src]="q.includes('.pdf') ? 'assets/images/pdf.webp': q.includes('.xlsx') || q.includes('.xls')? 'assets/images/xlsx.png' : q.includes('.png') || q.includes('.jpg') || q.includes('.webp') || q.includes('.jpeg') || q.includes('.svg') || q.includes('.CR2') ? filePath + q : 'assets/images/doc.jpg'"
+                                        alt="" loading="lazy" 
+                                        style="cursor: pointer;position: relative;margin-top:32px;height: 100px !important; width: 82px !important; object-fit: cover !important;" (click)="viewQueryDoc(q)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slun_div" *ngIf="solutionlist.length > 0">
+                        <h3>Solution</h3>
+                        <p *ngFor="let item of solutionlist;let i=index;"><strong>{{item.solutionGivenBy}} -</strong> {{item.solution}}</p>
+                            <div class="upload_section" *ngIf="doc2Arr.length > 0">
+                                <div class="screenshot_div">
+                                    <div class="upload_doc" style="position: relative;display: flex;gap:20px;" *ngFor="let doc of doc2Arr;">
+                                        <div class="img_thumbnails" *ngFor="let d of doc;">
+                                        <img *ngIf="d.length > 0" class="assignImg"
+                                            [src]="d.includes('.pdf') ? 'assets/images/pdf.webp': d.includes('.xlsx') || d.includes('.xls')? 'assets/images/xlsx.png' : d.includes('.png') || d.includes('.jpg') || d.includes('.webp') || d.includes('.jpeg') || d.includes('.svg') || d.includes('.CR2') ? filePath + d : 'assets/images/doc.jpg'"
+                                            alt="" loading="lazy" 
+                                            style="cursor: pointer;position: relative;margin-top:32px;height: 82px !important; width: 82px !important; object-fit: cover !important;"  (click)="viewSolutionDoc(d)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end" style="gap:10px;">
+                    <span *ngIf="((userType == 'Admin') || (userType == 'TM') || (userType == 'PM'))"><a class="send_btn" (click)="sendQuery(query,queryDocs);">Send Forward</a></span>
+                    <span *ngIf="((userType == 'Admin') || (userType == 'TM') || (userType == 'PM'))"><a (click)="sendRply(taskQueryId,assignmentId,taskID,taskDetailsId);" class="rplybtn">Reply</a></span>    
+                </div>
+               
+            </div>
+        </section>       
+        
+    </main>
+</section>
+
+
+

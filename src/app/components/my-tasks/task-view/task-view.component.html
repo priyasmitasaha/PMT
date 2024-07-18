@@ -1,0 +1,323 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+                <!--------------- for new projects  --------------->
+                <div class="my_leads_page">
+                    <div class="upload_area_btn mb-3">
+                        <a href="javascript:void(0);" class="btn btn-outline-light" (click)="requestExtension(assignmentId,invoiceId,taskId,taskDetailsId)" *ngIf="isExtension">Request For Extension</a>
+                        <a href="javascript:void(0);" class="btn btn-outline-light" (click)="sendQuery(assignmentId,invoiceId,taskId,taskDetailsId)" *ngIf="isQuery">Send Query</a>
+                    </div>
+                    <div class="projects_div">
+                        <div class="projects_div_heading">
+                            <h3>{{taskId}}</h3>
+                            <span style="font-size: 15px; margin-left: 16px; padding: 4px 10px; background: #7c5188; border-radius:16px;
+                            text-transform: capitalize;" *ngIf="workCategory != null">Category : <small *ngIf="workCategory == 'Medical'" style="color:#42d7d2;font-size: medium;">Medical</small><small *ngIf="workCategory == 'Management'" style="color:#d67777;font-size: medium;">Management</small><small *ngIf="workCategory == 'Dissertation'" style="color:#94db94;font-size: medium;">Dissertation</small><small *ngIf="workCategory == 'Proposal'" style="color:yellow;font-size: medium;">Proposal</small><small *ngIf="workCategory == 'Finance'" style="color:pink;font-size: medium;">Finance</small><small *ngIf="workCategory == 'Paperwork'" style="color:#c7bbbb;font-size: medium;">Paperwork</small><small *ngIf="workCategory == 'Interim Report'" style="color:white;font-size: medium;">Interim Report</small><small *ngIf="workCategory == 'Technical'" style="color:orange;font-size: medium;">Technical</small></span>
+                  
+                            <a (click)="editTask()" title="Edit Task Details" style="margin-left:10px;" *ngIf="userType == 'Admin' || userType == 'PM'"><i class="fa-solid fa-pen"></i></a>              
+                        </div>
+                        
+                        <div class="project_area">
+                           
+                                <div class="row align-items-center assignee_div mt-3 mb-2">
+                                    <div class="col-md-2" *ngIf="labell">
+                                        <label for="">assignee :</label>
+                                    </div>
+                                  
+                                    <div class="col-md-4" *ngIf="userType == 'Admin'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Project Manager'" style="color: white;" 
+                                            [settings]="dropdownProjectManagerSettings" [data]="projectManagerList" 
+                                            [(ngModel)]="projectmanagerarray"  (onSelect)="onItemSelect($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'PM'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Team Managers'" style="color: white;" 
+                                            [settings]="dropdownTeamManagerSettings" [data]="teamManagerList" 
+                                            [(ngModel)]="teamManagerarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'TM'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Quality Analyst'" style="color: white;"
+                                            [settings]="dropdownQAnalystSettings" [data]="qualityAnalystList" 
+                                            [(ngModel)]="qualityAnalystarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'TM'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Team Leaders'" style="color: white;" 
+                                            [settings]="dropdownTeamLeaderSettings" [data]="teamLeaderList" 
+                                            [(ngModel)]="teamLeaderarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                  
+                                    <div class="col-md-4" *ngIf="userType == 'TL'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Experts'" style="color: white;" 
+                                            [settings]="dropdownExpertsSettings" [data]="expertsList" 
+                                            [(ngModel)]="expertsarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+
+                                   
+                                    <!-- <div class="d-flex mt-4">                                        
+                                        <input *ngFor="let item of projectmanagerarray" type="text" class="form-control set_WC" [(ngModel)]="item.pminputValue" placeholder="Set Word-Count"/>
+                                        <input *ngFor="let item of teamManagerarray" type="text" class="form-control set_WC" [(ngModel)]="item.tminputValue" placeholder="Set Word-Count" />
+                                        <input *ngFor="let item of teamLeaderarray" type="text" class="form-control set_WC" [(ngModel)]="item.tlinputValue" placplaceholder="Set Word-Count" />
+                                        <input *ngFor="let item of qualityAnalystarray" type="text" class="form-control set_WC" [(ngModel)]="item.qainputValue" placplaceholder="Set Word-Count" />
+                                        <input *ngFor="let item of expertsarray" type="text" class="form-control set_WC" [(ngModel)]="item.expinputValue" placplaceholder="Set Word-Count" />
+                                    </div> -->
+
+                                    <!-- <div class="d-flex mt-4">
+                                       
+                                    </div>
+
+                                    <div class="d-flex mt-4">
+                                        
+                                    </div> -->
+                                </div>
+                                    <!-------- QUERY FORM START-------->
+
+
+                                   
+                            
+                            <div class="task_description">
+                                <div class="row">
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Topic Chosen : </label>
+                                        <input type="text" id="topic_chosen" class="form-control" [(ngModel)]="topic_chosen" [readonly]="isReadOnly">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <Label>Subject :</Label>
+                                        <input type="text" id="subject" class="form-control" [(ngModel)]="subject" [readonly]="isReadOnly">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Due Date :</label>
+                                        <input type="text" id="dueDate" class="form-control" [(ngModel)]="dueDate" [readonly]="isReadOnly">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Word Count :</label>
+                                        <input type="text" id="wordCount" class="form-control" [(ngModel)]="wordCount" [readonly]="isReadOnly">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Time :</label>
+                                        <input type="text" id="deadlineTime" class="form-control" [(ngModel)]="deadlineTime" [readonly]="isReadOnly">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Country :</label>
+                                        <input type="text" id="country" class="form-control" [(ngModel)]="country" [readonly]="isReadOnly">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Course :</label>
+                                        <input type="text" id="course" class="form-control" [(ngModel)]="course" [readonly]="isReadOnly">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Assignment :</label>
+                                        <textarea id="assignment" class="form-control" rows="1" [(ngModel)]="assignment" [readonly]="isEdit"></textarea>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">References style/ formating :</label>
+                                        <textarea id="referenceStyle" class="form-control" rows="1" [(ngModel)]="referenceStyle" [readonly]="isEdit"></textarea>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">No of references :</label>
+                                        <input type="text" id="noOfReferences" class="form-control" [(ngModel)]="noOfReferences" [readonly]="isEdit"  onkeypress="if(this.value.length >9) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Bibliography :</label>
+                                        <input type="text" id="bibliography" class="form-control" [(ngModel)]="bibliography" [readonly]="isEdit"  onkeypress="if(this.value.length >9) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;">
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Assignment Instruction :</label>
+                                        <textarea id="assignmentInstruction" class="form-control" rows="1" [(ngModel)]="assignmentInstruction" [readonly]="isEdit"></textarea>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Proposed Structure :</label>
+                                        <textarea id="proposedStructure" class="form-control" rows="1" [(ngModel)]="proposedStructure" [readonly]="isEdit"></textarea>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="">Drive Link :</label>
+                                        <p><a href="{{driveLink}}" target="_blank">{{driveLink}}</a></p>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label for="">uploaded files :</label>
+                                        <div class="d-flex flex-wrap">
+                                            <div *ngFor="let item of allfiles;let i=index;" style="margin: 6px 8px 0 0;">
+                                                <img [src]="item.includes('.docx') || item.includes('.doc') ?  'assets/images/doc.jpg' : item.includes('.txt') ?  'assets/images/txt.png' : item.includes('.pdf') ? 'assets/images/pdf.webp': item.includes('.xlsx') || item.includes('.xls')? 'assets/images/xlsx.png' : item.includes('.png') || item.includes('.jpg') || item.includes('.webp') || item.includes('.jpeg') || item.includes('.svg') || item.includes('.CR2') ? imgPath + item : 'assets/images/doc.jpg'" alt="" style="height:56px;width: 56px;" (click)="viewDoc(item)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">docs link :</label>
+                                        <p *ngIf="isDocDiv"><a href="{{docLink}}" target="_blank"> {{docLink}} </a></p>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  [(ngModel)]="docLink" [readonly]="isDOCLINK" *ngIf="isHidden"></textarea>
+                                    </div>    
+
+                                    <div class="col-sm-12" >
+                                        <div class="upload_file_area mt-3" >
+                                            <div class="screenshot_div d-flex flex-wrap">   
+                                                <div class="upload_doc" style="position: relative;"style="position: relative; width: 8%; margin: 16px 12px 8px 0;"
+                                                *ngFor="let item of fileDocAll;let i=index;">
+                                                <img class="assignImg"
+                                                    [src]="item.includes('.pdf') ? 'assets/images/pdf.webp': item.includes('.xlsx') || item.includes('.xls')? 'assets/images/xlsx.png' : item.includes('.png') || item.includes('.jpg') || item.includes('.webp') || item.includes('.jpeg') || item.includes('.svg') || item.includes('.CR2') ? filePath + item : 'assets/images/doc.jpg'"
+                                                    alt="" loading="lazy" (click)="viewFile(item)"
+                                                    style="cursor: pointer;position: relative;height: 82px !important; width: 82px !important; object-fit: cover !important;">
+                                                    <span *ngIf="fileDocAll.length>0"  (click)="removeFile(i)"
+                                                        class="fa-solid fa-xmark" style="position: absolute;top: -6px;
+                                                        right: 0px;
+                                                        color: red;
+                                                        padding: 2px 4px;
+                                                        background: white;
+                                                        cursor: pointer;
+                                                        border-radius: 50%;">
+                                                    </span>
+                                                </div>
+                                            </div>       
+                                           
+                                                <input type="file" id="fileInput" name="files[]" (change)="fileUpload($event)" multiple>
+                                        
+                                                <label for="fileInput" id="fileLabel" *ngIf="isFileDiv">
+                                                    <span>Upload Your Documents</span>
+                                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                                    <br>
+                                                </label> 
+                                                                     
+                                                <!-- <label for="fileInput1" id="fileLabel1" class="uploadButton">Upload</label> -->
+                                                <!-- <button class="delivery_btn mt-3">Sent and Mark as Delivered</button> -->
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-3 mt-3" *ngIf="isMark">
+                                        <button class="btn1" (click)="markasComplete()">mark as completed</button>
+                                        <button class="btn1" *ngIf="isComplete">completed</button>
+                                    </div>
+                                    <div class="col-3 mt-3" *ngIf="isAssign && pageName == 'task-allocation'">
+                                        <button class="btn1 assign_btn" (click)="submitAssignee()">assign the task</button>
+                                    </div>
+                                    <div class="col-3 mt-3" *ngIf="isUpdate">
+                                        <button class="btn1 update_btn" (click)="updateTask()">update task details</button>
+                                    </div>
+                                </div>
+                                <div class="invite_box mt-5" *ngIf="pmCollabs.length >0">
+                                    <div class="invite_heading">
+                                        <h3 class="title">People</h3>
+                                        <p class="mb-0">My Collaborator :</p>
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#project_manager">
+                                                    Project Manager
+                                                </a>
+                                            </li>
+                                            <li class="nav-item" *ngIf="tmCollabs.length >0">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#team_manager">
+                                                    Team Manager
+                                                </a>
+                                            </li>
+                                            <li class="nav-item" *ngIf="tlCollabs.length >0">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#team_leader">
+                                                    Team Leader
+                                                </a>
+                                            </li>
+                                            <li class="nav-item" *ngIf="qaCollabs.length >0">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#quality_analyst">
+                                                    Quality Analyst
+                                                </a>
+                                            </li>
+                                            <li class="nav-item" *ngIf="expertCollabs.length >0">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#experts">
+                                                    Experts
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+                                    <div class="invite_wrapper">
+                                        <div class="tab-content">
+                                            <div *ngIf="pmCollabs.length >0" class="tab-pane active" id="project_manager">
+                                                <div class="invite_wrapper">
+                                                    <div class="tab_item" *ngFor="let item of pmCollabs;let i=index;">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg">
+                                                            <img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>{{item.firstName}}</h4> 
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="team_manager">
+                                                <div class="invite_wrapper">
+                                                    <div class="tab_item" *ngFor="let item of tmCollabs;let i=index;">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg">
+                                                            <img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>{{item.firstName}}</h4>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="team_leader">
+                                                <div class="invite_wrapper">
+                                                    <div class="tab_item" *ngFor="let item of tlCollabs;let i=index;">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg">
+                                                            <img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>{{item.firstName}}</h4>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="quality_analyst">
+                                                <div class="invite_wrapper">
+                                                    <div class="tab_item" *ngFor="let item of qaCollabs;let i=index;">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg">
+                                                            <img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>{{item.firstName}}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="experts">
+                                                <div class="invite_wrapper">
+                                                    <div class="tab_item" *ngFor="let item of expertCollabs;let i=index;">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img1.png" alt="" *ngIf="!item.profileImg">
+                                                            <img [src]="imagePath + item.profileImg" alt="Description of the image" *ngIf="item.profileImg" style="height: 50px;">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>{{item.firstName}}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+</section>
+
+
+

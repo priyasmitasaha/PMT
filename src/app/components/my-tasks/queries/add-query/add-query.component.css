@@ -1,0 +1,8 @@
+.img_thumbnails {
+    position: relative;
+}
+.thumbnail_img_area {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}

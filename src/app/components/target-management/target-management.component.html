@@ -1,0 +1,135 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+                <div class="my_leads_page" style="color: white;" *ngIf="isHidden">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="top_left_heading">
+                            <i class="fa-solid fa-list-check  light_green"></i> <span class="light_green"> Target Management</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <ul class="top_left_heading_ul">
+                                <li>
+                                    <mat-form-field>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                          <input matStartDate placeholder="Start date" [(ngModel)]="startDate" (dateChange)="startDateChanged($event)">
+                                          <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="endDateChanged($event)">
+                                        </mat-date-range-input>
+                                        
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                      </mat-form-field>
+                                      <button (click)="getAllTargetCount()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="target_div" >
+                                <h5 class=" color_white">Word Count Target</h5>
+                                <h4 class=" color_white">600,000/1,00,0000</h4>
+                                <small>Achieved</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="target_div" >
+                                <h5 class=" color_white">Customer Target</h5>
+                                <h4 class=" color_white">550/1000</h4>
+                                <small>Achieved</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="target_div" >
+                                <h5 class=" color_white">Reach-outs Target</h5>
+                                <h4 class=" color_white">1500/25000</h4>
+                                <small>Achieved</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="target_div" >
+                                <h5 class=" color_white">University Target</h5>
+                                <h4 class=" color_white">4/30</h4>
+                                <small>Achieved</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="target_div" >
+                                <h5 class=" color_white">Invoice Target</h5>
+                                <h4 class=" color_white">250/1000</h4>
+                                <small>Achieved</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="target_div" >
+                                <h5 class=" color_white">Dissertation Target</h5>
+                                <h4 class=" color_white">200/1000</h4>
+                                <small>Achieved</small>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="overview_heading d-flex align-items-center">
+                                <img src="assets/images/reward.png" alt="" loading="lazy">
+                                <span class="h2 mb-0" style="font-weight: 400;"> Achieved Targets</span>
+                            </div>
+                            <div class="achived_terget_txt text-center">
+                                <h4 class="h2 green_clr" style="font-weight: 500;">1,00,000</h4>
+                                <span class="h3 me-2" style="font-weight: 400;">out of </span>
+                                <span class="h2 color_white" style="font-weight: 500;"> 4,00,000</span>
+                            </div>
+                           
+                        </div>
+                        <div class="col-md-7">
+    
+                        </div>
+                    </div>
+              </div>
+
+               <!------------- for expert logged in only ------------->
+               <div class="my_leads_page" *ngIf="isExpert">
+                    <select class="form-select select_month form-select-sm" aria-label=".form-select-sm example" [(ngModel)]="month" (change)="getWordTargetMonthly();">
+                        <option value="">Select</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+
+                    <div class="row" *ngIf="isExpert">
+                        <div class="col-md-12 mb-4 mt-5">
+                            <div class="target_div" >
+                                <h5>Word Count Target</h5>
+                                <h3>30,000 / 50,000</h3>
+                                <small>Achieved</small>
+                            </div>
+                        </div>
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+               
+            </div>
+            </div>
+        </section>
+        
+    </main>
+</section>
+
+

@@ -1,0 +1,146 @@
+<section id="wrapper">
+
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="welcome_section text-center">
+                            <p>{{ currentDate | date:'EEEE, MMMM d' }}</p>
+                            <h2>{{ message }}, {{loginName}}</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-7 col-sm-12" *ngIf="userType == 'Admin' || userType == 'PM' || userType == 'TM' || userType == 'TL' || userType == 'QA'">
+                        <div class="task_content">
+                                <ul class="task_listbar">
+                                    <li>My task</li>
+                                    <li>0 Tasks Completed</li>
+                                </ul>
+                            <div class="taskbar_tabs">
+                                <div class="taskbar_title">
+                                    <img src="assets/images/check_plus.png" alt="">
+                                    <h4>My Tasks</h4>
+                                </div>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                            data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                            aria-selected="true">assigned</button>
+                                    </li>
+                                  
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                            data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
+                                            aria-selected="false">Completed</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="tab_list" *ngFor="let item of assignedList;let i=index;">
+                                            <div class="task_item">
+                                                <img src="assets/images/green_tickmark.png" alt="">
+                                                <p><a (click)="goToTask(item.assignmentId,item.invoiceId,item.taskId,item.taskDetailsId);">{{item.assignment}}</a></p>
+                                                <p>WC: {{item.wordCount}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="tab-pane" id="contact" role="tabpanel"
+                                        aria-labelledby="contact-tab">
+                                        <div class="tab_list" *ngFor="let item of completeTaskList;let i=index;">
+                                            <div class="task_item">
+                                                <img src="assets/images/green_tickmark.png" alt="">
+                                                <p>{{item.assignment}} </p>
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-12" *ngIf="userType == 'Admin' || userType == 'PM' || userType == 'TM' || userType == 'TL' || userType == 'QA'">
+                       
+                        <div class="project_box" *ngIf="taskList.length != 0">
+                            <div class="d-flex justify-content-between">
+                                <h4>Recent Projects</h4>
+                            </div>
+                            <div class="project_list">
+                                <ul>
+                                    <li *ngFor="let item of taskList;let i=index;">
+                                        <img src="assets/images/project_icon1.png" alt="">
+                                        <div class="project_text">
+                                            <h5> <span (click)="viewProject(item.assignmentId, item.invoiceId, item.taskId,item.taskDetailsId,'assigned-task');">{{item.taskId}}</span></h5>
+                                            <p>{{item.assignment}}</p>
+                                        </div>
+                                    </li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <!-- Invite Area -->
+
+ 
+                <!-------------- for Expert Dashboard ---------------->
+                <div class="account_db_top_div mt-1" *ngIf="isExpert">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="amount_confirmed task_common_div">
+                                <img src="assets/images/allocated_1.png" alt="" loading="lazy">
+                                <span>Total Task Allocated </span>
+                                <h3>{{taskAllocatedCount}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="pending_amount task_common_div">
+                                <img src="assets/images/delivered_1.png" alt="" loading="lazy">
+                                <span>Total Task Delivered</span>
+                                <h3>{{taskDelivededCount}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="invoice_created task_common_div">
+                                <img src="assets/images/allocated_2.png" alt="" loading="lazy">
+                                <span>Allocated</span>
+                                <h3>{{allocationTaskWC}}</h3>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-4">
+                            <div class="amount_confirmed task_common_div">
+                                <img src="assets/images/black_rework.png" alt="" loading="lazy">
+                                <span>rework </span>
+                                <h3>0</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="amount_confirmed task_common_div">
+                                <img src="assets/images/black_redo.png" alt="" loading="lazy">
+                                <span>redo </span>
+                                <h3>0</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="amount_confirmed task_common_div">
+                                <img src="assets/images/black_resit.png" alt="" loading="lazy">
+                                <span>Resit </span>
+                                <h3>0</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------- for Expert Dashboard ---------------->
+            </div>
+        </section>
+    </main>
+</section>

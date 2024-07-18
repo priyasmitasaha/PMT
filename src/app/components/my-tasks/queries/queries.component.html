@@ -1,0 +1,110 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-clipboard-question light_green"></i> 
+                                <span class="light_green">queries</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="top_left_heading_ul">
+                                <div class="header_search id_search me-5">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="Search Task Id...">
+                                </div>
+                                <mat-form-field>
+                                    <mat-date-range-input [rangePicker]="picker">
+                                      <input matStartDate placeholder="Start date" [(ngModel)]="startDate" (dateChange)="startDateChanged($event)">
+                                      <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="endDateChanged($event)">
+                                    </mat-date-range-input>
+                                    
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #picker></mat-date-range-picker>
+                                  </mat-form-field>
+                                  <button (click)="getQueries(type)" class="srch_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table_div">
+                    <button class="solution solved" [ngClass]="{'active': isActive}" (click)="getQuery('solved');">Solved</button>
+                    <button class="solution unsolved" [ngClass]="{'active': isActiveBtn}" (click)="getQuery('unsolved');">Unsolved</button>
+                    <button class="solution partial" [ngClass]="{'active': isBtn}" (click)="getQuery('partialSolved');">Partially Solved</button>
+                    <div class="table-responsive">
+                        <table class="table account_db_tbl query_extention_tbl">
+                            <thead>
+                                <tr>
+                                    <th scope="col">sl no.</th>
+                                    <th scope="col">Task ID</th>     
+                                    <th scope="col">query sent</th>
+                                    <th scope="col">query raised to</th>
+                                    <th scope="col">date</th>
+                                    <th scope="col">time</th>
+                                    <th scope="col" *ngIf="isStatus">status</th>
+                                    <th scope="col" *ngIf="forPM">status</th>
+                                    <th scope="col" *ngIf="isSend"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of queryList;let i=index;">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.taskId}}</td>
+                                    <td>{{item.queryFromName}}</td>
+                                    <td>{{item.queryToName}}</td>
+                                    <td>{{convertDateTime(item.querySentAt)}}</td>
+                                    <td>{{convertTimeAMPM(getTime(item.querySentAt))}}</td>
+                                    <td *ngIf="isStatus">
+                                        <select class="form-control" style="width: 70%; margin: 0 auto;text-align: center;" [(ngModel)]="item.queryStatus" (change)="openConfirmDialog(item.taskQueryId, item.assignmentId, item.taskId,item.taskDetailsId, item.queryStatus);" [disabled]="isDropdownDisabled">
+                                            <option value="">Select Status</option>
+                                            <option [value]="0">Pending</option>
+                                            <option [value]="1">Solved</option>
+                                            <option [value]="2">Partially Solved</option>
+                                            <option [value]="3">Not Solved</option>
+                                        </select>
+                                    </td>
+                                    <td *ngIf="forPM && item.queryStatus == 0">Pending</td>
+                                    <td *ngIf="forPM && item.queryStatus == 1">Solved</td>
+                                    <td *ngIf="forPM && item.queryStatus == 2">Partially Solved</td>
+                                    <td *ngIf="forPM && item.queryStatus == 3">Not Solved</td>
+                                    <td title="view query" style="text-align: center;"><a (click)="viewQuery(item.taskQueryId,item.assignmentId,item.invoiceId,item.taskId,item.taskDetailsId);"><i class="fa-regular fa-eye"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="Page navigation example" class="mt-3">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                </div>
+
+            </div>
+        </section>       
+        
+    </main>
+</section>
+
+

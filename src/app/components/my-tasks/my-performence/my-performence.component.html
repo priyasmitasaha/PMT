@@ -1,0 +1,111 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">                            
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-file-circle-check light_green"></i> <span class="light_green"> my performance</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <ul class="top_left_heading_ul">
+                                <li>
+                                    <mat-form-field>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                          <input matStartDate placeholder="Start date" [(ngModel)]="startDate" (dateChange)="startDateChanged($event)">
+                                          <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="endDateChanged($event)">
+                                        </mat-date-range-input>
+                                        
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                      </mat-form-field>
+                                      <button (click)="getExpertMonthlyDetails()" class="srch_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> 
+                </div>
+                        
+                <div class="my_performance_area">
+                    <!-- <div class="monthly_allocation_div monthly_div" *ngIf="monthlyallocation > 0"> -->
+                        <div class="monthly_allocation_div monthly_div">
+                        <h5>My Monthly Allocation</h5>
+                        <h2>50,000</h2>
+                    </div>
+                    <div class="monthly_delivered_div monthly_div">
+                        <h5>My Monthly Delivery</h5>
+                        <h2>12,27,000</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="repeat_div ">
+                                <div class="row align-items-center text-center">
+                                    <div class="col-6">
+                                        <img src="assets/images/rework.png" alt="" loading="lazy">
+                                    </div>
+                                    <div class="col-6">
+                                        <h5>rework</h5>
+                                        <h2>03</h2>
+                                    </div>
+                                </div>                               
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="repeat_div ">
+                                <div class="row align-items-center text-center">
+                                    <div class="col-6">
+                                        <img src="assets/images/redo.png" alt="" loading="lazy">
+                                    </div>
+                                    <div class="col-6">
+                                        <h5>redo</h5>
+                                        <h2>02</h2>
+                                    </div>
+                                </div>                               
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="repeat_div ">
+                                <div class="row align-items-center text-center">
+                                    <div class="col-6">
+                                        <img src="assets/images/resit.png" alt="" loading="lazy">
+                                    </div>
+                                    <div class="col-6">
+                                        <h5>resit</h5>
+                                        <h2>01</h2>
+                                    </div>
+                                </div>                               
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="repeat_div ">
+                                <div class="row align-items-center text-center">
+                                    <div class="col-6">
+                                        <img src="assets/images/dissertations.png" alt="" loading="lazy">
+                                    </div>
+                                    <div class="col-6">
+                                        <h5>dissertations</h5>
+                                        <h2>01</h2>
+                                    </div>
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+    </main>
+</section>
+
+
+

@@ -1,0 +1,133 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">
+
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-square-check light_green"></i>
+                                 <span class="light_green"> delivered tasks</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <ul class="top_left_heading_ul">
+                                <li>
+                                    <mat-form-field>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                          <input matStartDate placeholder="Start date" [(ngModel)]="startDate" (dateChange)="startDateChanged($event)">
+                                          <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="endDateChanged($event)">
+                                        </mat-date-range-input>
+                                        
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                      </mat-form-field>
+                                      <button (click)="getDeliveredTaskList()" class="srch_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </li>
+                                <!-- <li class="share">
+                                    <i class="fa-regular fa-share-from-square"></i>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account_db_top_div">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="amount_confirmed task_common_div">
+                                <img src="assets/images/allocated_1.png" alt="" loading="lazy">
+                                <span>Total Task Allocated </span>
+                                <h3>08</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="pending_amount task_common_div">
+                                <img src="assets/images/deadline_missed.png" alt="" loading="lazy">
+                                <span>Total late by</span>
+                                <h3>4Hr</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="pending_amount task_common_div">
+                                <img src="assets/images/delivered.png" alt="" loading="lazy">
+                                <span>Total Task Delivered</span>
+                                <h3>06</h3>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="table_div">
+                    <div class="table-responsive">
+                        <table class="table account_db_tbl ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Task ID</th>
+                                    <th scope="col">WC</th>
+                                    <th scope="col">Work Category</th>
+                                    <th scope="col">work type</th>
+                                    <th scope="col">University</th>
+                                    <th scope="col">dadeline</th>
+                                    <th scope="col">time</th>
+                                    <th scope="col">status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="color_white">
+                                <tr>
+                                    <td>ASH#1234</td>
+                                    <td>3000</td>
+                                    <td>Technical</td>
+                                    <td>fresh work</td>
+                                    <td>Coventry University</td>
+                                    <td>05-04-24</td>
+                                    <td>05:00 PM</td>
+                                    <td>delivered</td>
+                                </tr>
+                                <tr>
+                                    <td>ASH#1234</td>
+                                    <td>3000</td>
+                                    <td>Technical</td>
+                                    <td>fresh work</td>
+                                    <td>Coventry University</td>
+                                    <td>05-04-24</td>
+                                    <td>05:00 PM</td>
+                                    <td>delivered</td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav aria-label="Page navigation example" class="mt-3">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+</section>
+
+

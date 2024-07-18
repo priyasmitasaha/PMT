@@ -1,0 +1,68 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+        
+        <!-- Page Content -->
+
+      
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-business-time  light_green"></i> 
+                                <span class="light_green"> extentions</span>
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-7">
+                            <ul class="top_left_heading_ul">
+                                <li>
+                                    <div class="color_white year">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        <input type="date" class="form-date">
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+
+               <div class="new_query_div mb-3">
+                    <h4 class="inbox_heading">add extentions</h4>
+                </div>
+
+                <div  class="query_extension_form mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">task id</label>
+                            <input class="form-control" type="text" [(ngModel)]="taskId" readonly>
+                        </div>  
+                        <div class="col-md-4">
+                            <label class="form-label" >date extention</label>
+                            <input class="form-control" type="date" [min]="maxDate" [(ngModel)]="dateExtension">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">time extention</label>
+                            <input class="form-control" type="time" [(ngModel)]="timeExtension">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Message</label>
+                            <textarea  class="form-control" rows="1" [(ngModel)]="message"></textarea>
+                        </div>  
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="delivery_btn" (click)="submitExtention()">submit</button>
+                    </div>                    
+                </div> 
+               
+            </div>
+        </section>
+        
+    </main>
+</section>
+
+
+

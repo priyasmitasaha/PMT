@@ -1,0 +1,173 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="task_confirmation_area">
+                <span class="form_edit_icon" *ngIf="userType == 'Admin'">
+                    <a (click)="editProfile(idarr)"><i class="fa-solid fa-pen-to-square"></i></a>              
+                </span>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="confirmation_user">
+                                <img src="assets/images/no-user.png" alt="" *ngIf="!profileimg">
+                                <img [src]="imgPath + profileimg" alt="Description of the image" *ngIf="profileimg">
+                                <div class="choose_file_div">
+                                    <div class="camera_div">
+                                        <input type="file"  name="profileimg" id="profileimg" (change)="profileUpload()">
+                                        <i class="fa-solid fa-camera"></i>
+                                    </div>
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-5">
+                            <div class="col-sm-6">
+                                <div class="input_group">
+                                    <label for="f_name">First Name <span>*</span></label>
+                                    <input type="text" id="firstName" class="form-control" [(ngModel)]="firstName" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input_group">
+                                    <label for="l_name">Last Name <span>*</span></label>
+                                    <input type="text" id="lastName" class="form-control" [(ngModel)]="lastName" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input_group">
+                                    <label for="contact_number">Contact Number <span>*</span></label>
+                                    <input type="text" id="contactNumber" class="form-control" [(ngModel)]="contactNumber"  onkeypress="if(this.value.length >9) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input_group">
+                                    <label for="alt_number">Alternative Number</label>
+                                    <input type="text" id="altNumber" class="form-control" [(ngModel)]="altNumber"  onkeypress="if(this.value.length >9) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input_group">
+                                    <label for="alt_number">Email <span>*</span></label>
+                                    <input type="email" id="email" class="form-control" [(ngModel)]="email" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="input_group">
+                                    <label for="address">Address <span>*</span></label>
+                                    <textarea id="address" class="form-control" rows="3" [(ngModel)]="address" [readonly]="isReadOnly"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="pin_code">Pin Code <span>*</span></label>
+                                    <input type="text" name="pinCode" id="pinCode" class="form-control" [(ngModel)]="pinCode" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="state">State <span>*</span></label>
+                                    <select name="state" id="state" class="form-control" style="appearance: auto;" [(ngModel)]="state" [disabled]="isDropdownDisabled">
+                                        <option value="">Select state</option>
+                                        <option *ngFor="let item of stateList" [value]="item.stateId">{{item.stateName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="joining_date">Joining Date <span>*</span></label>
+                                    <input type="date" id="joiningDate" class="form-control" [max]="maxDate" [(ngModel)]="joiningDate" (change)="getExperience();" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="experience">Experience <span>*</span></label>
+                                    <input type="text" id="experience" class="form-control" [(ngModel)]="experience" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="position">Position <span>*</span></label>
+                                    <select id="position" class="form-control" [(ngModel)]="position" (change)="assign();" [disabled]="isDropdownDisabled">
+                                        <option [value]="">Select</option>
+                                        <option *ngFor="let item of positionList" [value]="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" *ngIf="isVisible">
+                                <div class="input_group">
+                                    <label for="assignTo">Assign To </label>
+                                    <select id="assignTo" class="form-control" [(ngModel)]="assignTo" [disabled]="isDropdownDisabled">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let item of userList" [value]="item.userId">{{item.firstName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                          
+                            <div class="col-sm-3" *ngIf="isShift">
+                                <div class="input_group">
+                                    <label for="shiftName">Shift To</label>
+                                    <select id="shiftName" class="form-control" [(ngModel)]="shiftName" [disabled]="isDropdownDisabled">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let item of userList" [value]="item.userId">{{item.firstName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" *ngIf="isPromote">
+                                <div class="input_group">
+                                    <label for="promoteTo">Promote To</label>
+                                    <select id="promoteTo" class="form-control" [(ngModel)]="promoteTo">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let item of positionList" [value]="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" *ngIf="isCapacity">
+                                <div class="input_group">
+                                    <label for="position">Capacity <span>*</span></label>
+                                    <input type="text" id="capacity" class="form-control"
+                                    [(ngModel)]="capacity" [readonly]="isCapa">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="education">Educational Background <span>*</span></label>
+                                    <input type="text" id="educationBackground" class="form-control" [(ngModel)]="educationBackground" [readonly]="isReadMode">
+                                </div>
+                            </div>
+                          
+                            <div class="col-sm-6">
+                                <div class="input_group">
+                                    <label for="expertise">Expertise <span>*</span></label> 
+                                    <input type="text" id="expertise" class="form-control" [(ngModel)]="expertise" [readonly]="isReadMode">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="position">Status</label>
+                                    <select id="status" class="form-control" [(ngModel)]="status" [disabled]="isDropdownDisabled">
+                                        <option value="">Select</option>
+                                        <option [value]="1">Active</option>
+                                        <option [value]="0">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" *ngIf="isButton">
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn1 mt-3" (click)="updateProfile()"> update profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+</section>
+
+
+
+

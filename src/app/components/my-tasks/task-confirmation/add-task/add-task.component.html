@@ -1,0 +1,80 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-file-circle-check light_green"></i><span class="light_green"> task confirmation</span>
+                            </div>
+                        </div>
+                      
+                    </div> 
+                </div>
+                        
+                <div class="task_confirmation_area">
+                    <div class="container">
+                       <div class="row">
+                        <div class="col-sm-12">
+                           <h4 class="sub_heading">Task Confirmation</h4>
+                           <div style="position: relative;">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="Type your message..." style="background: #06576d;color: white;" [(ngModel)]="task_confirmation"></textarea>
+                            </div>
+
+                            <div class="confirm_btn_area">
+                                <div class="left_confirm_btn">
+                                    <div class="upload_area" style="position: relative !important;width: 40%;">
+                                        <input type="file" style="position: relative !important;width: 47%;z-index: 1;opacity: 0;" name="files[]" id="taskImg" (change)="taskfileUpload($event)" multiple>
+                                        <label for="taskImg" class="custom_btn task_confirmation_box"><i class="fa-solid fa-upload"></i> Upload</label>
+                                    </div>
+                                    
+                                    <button (click)="openDialog('taskconfirm')" class="custom_btn m-0">Send To</button>
+                                </div>
+
+                                <div class="right_confirm_btn" *ngIf="userType == 'TL'">
+                                    <button class="confirm_btn m-0">I confirm</button>
+                                    <!-- <button class="confirm_btn confirm_btn_fill m-0"><i class="fa-solid fa-check"></i> I confirm</button> -->
+                                </div>
+                            </div>
+                            <div class="upload_section">
+                                <div class="screenshot_div">
+                                    <div class="upload_doc" style="position: relative;"
+                                        *ngFor="let item of taskDocAll;let i=index;">
+                                        <div class="img_thumbnails">
+                                        <img class="assignImg"
+                                            [src]="item.includes('.pdf') ? 'assets/images/pdf.webp': item.includes('.xlsx') || item.includes('.xls')? 'assets/images/xlsx.png' : item.includes('.png') || item.includes('.jpg') || item.includes('.webp') || item.includes('.jpeg') || item.includes('.svg') || item.includes('.CR2') ? filePath + item : 'assets/images/doc.jpg'"
+                                            alt="" loading="lazy" (click)="viewFile(item)"
+                                            style="cursor: pointer;position: relative;margin-top:32px;height: 82px !important; width: 82px !important; object-fit: cover !important;">
+                                            <span *ngIf="taskDocAll.length>0"  (click)="removeFile(i)"
+                                                class="fa-solid fa-xmark" style="position: absolute;right: -8px;
+    top: 26px;color: red;padding: 2px 4px;background: white;cursor: pointer;border-radius: 50%;">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+    </main>
+</section>
+
+
+
+
+
+
+
+

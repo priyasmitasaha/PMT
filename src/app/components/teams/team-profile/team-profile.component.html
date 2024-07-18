@@ -1,0 +1,282 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+         <ng-container *ngTemplateOutlet="myTemplate"> </ng-container>
+
+
+            <ng-template #myTemplate> 
+                <section class="page_content">
+                    <div class="team_profile">
+                        <div class="container">
+                            <div class="row" *ngIf="userType == 'Admin'">
+                                <div class="col-sm-12" *ngFor="let pmanager of userList;let t=index;">
+                                    <div class="profile_card">
+                                        <div class="accordion accordion-flush" id="team_profile">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" [id]="'flush-headingOne'+ t">
+                                                    <button class="accordion-button" type="button" [ngClass]="{ 'collapsed': t != 0 }"
+                                                        data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOne'+t"
+                                                        aria-expanded="false" [attr.aria-controls]="'flush-collapseOne'+t"  (click)="getTeamManagerList(pmanager.userId, pmanager.userType,t)" aria-controls="flush-collapseOne">
+                                                        <div class="profile_header">
+                                                            <div class="profile_left">
+                                                                <div class="confirmation_user">
+                                                                    <img [src]="imgPath + pmanager.profileImg" alt="Description of the image" *ngIf="pmanager.profileImg">
+                                                                    <img src="assets/images/no-user.png" alt="" *ngIf="!pmanager.profileImg">
+                                                                </div>
+                                                                <div class="profile_info">
+                                                                    <h2>{{pmanager.firstName}} {{pmanager.lastName}}</h2>
+                                                                    <span style="color: var(--lightGreen);font-size: larger;" *ngIf="pmanager.userType == 'PM'">Project Manager</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile_mid">  
+                                                                <h6 class="ms-2">Capacity : {{pmanager.capacity}}</h6>    
+                                                                <h6 class="ms-2">Joining Date : {{convertDateTime(pmanager.joiningDate)}}</h6>   
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                    <a (click)="getUserDetailsById(pmanager.userId)" title="View Profile"><i class="fa-regular fa-eye"></i></a>
+                                                </h2>
+                                                <div [id]="'flush-collapseOne'+ t"  class="accordion-collapse collapse" 
+                                                    [attr.aria-labelledby]="'flush-headingOne'+ t"
+                                                    data-bs-parent="#team_profile">
+                                                    <div class="accordion-body">
+                                                        <table class="table">
+                                                            <thead class="table-borderless">
+                                                            <tr>
+                                                                <th scope="col">Sl No.</th>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Position</th>
+                                                                <th scope="col">Joining Date</th>
+                                                                <th scope="col">Assigned On</th>
+                                                                <th scope="col">Capacity</th>
+                                                                <th scope="col"></th>
+                                                                <th scope="col"></th>
+                                                                <th scope="col"></th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let leader of tmList;let i=index;">
+                                                                    <td>{{i+1}}</td>
+                                                                    <td>{{leader.firstName}} {{leader.lastName}}</td>
+                                                                    <td>{{leader.userType}}</td>
+                                                                    <td>{{convertDateTime(leader.joiningDate)}}</td>
+                                                                    <td>{{convertDateTime(leader.assignAt)}}</td>
+                                                                    <td>{{leader.capacity}}</td>
+                                                                    <td><a (click)="viewTeamLeaders(leader.userId , leader.userType)" class="viewexpert" *ngIf="userType == 'Admin'">View Team Leaders</a></td>
+                                                                    <td><a (click)="viewExperts(leader.userId,leader.userType)" class="viewexpert" *ngIf="userType == 'PM' || userType == 'TM'">View Experts</a></td>
+                                                                    <td>
+                                                                        <a (click)="getUserDetailsById(leader.userId)" title="View Profile"><i class="fa-regular fa-eye"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="userType == 'PM'">
+                                <div class="col-sm-12">
+                                    <div class="top_left_heading"><i  class="fa-solid fa-list-check light_green"></i>
+                                        <span class="light_green">Team Managers</span>
+                                    </div>
+                                    <div class="profile_card">
+                                        
+                                        <table class="table">
+                                            <thead class="table-borderless">
+                                            <tr>
+                                                <th scope="col">Sl No.</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Position</th>
+                                                <th scope="col">Joining Date</th>
+                                                <th scope="col">Assigned On</th>
+                                                <th scope="col">Capacity</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let leader of tmList;let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{leader.firstName}} {{leader.lastName}}</td>
+                                                    <td>{{leader.userType}}</td>
+                                                    <td>{{convertDateTime(leader.joiningDate)}}</td>
+                                                    <td>{{convertDateTime(leader.assignAt)}}</td>
+                                                    <td>{{leader.capacity}}</td>
+                                                    <td><a (click)="viewTeamLeaders(leader.userId , leader.userType)" class="viewexpert" *ngIf="userType == 'PM'">View Team Leaders</a></td>
+                                                    <td>
+                                                        <a (click)="getUserDetailsById(leader.userId)" title="View Profile"><i class="fa-regular fa-eye"></i></a>
+                                                    </td>
+                                                </tr>
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="userType == 'TM'">
+                                <div class="col-sm-12">
+                                    <div class="top_left_heading"><i  class="fa-solid fa-list-check light_green"></i>
+                                        <span class="light_green">Team Leaders</span>
+                                    </div>
+                                    <div class="profile_card">
+                                        <table class="table">
+                                            <thead class="table-borderless">
+                                            <tr>
+                                                <th scope="col">Sl No.</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Position</th>
+                                                <th scope="col">Joining Date</th>
+                                                <th scope="col">Assigned On</th>
+                                                <th scope="col">Capacity</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let leader of tLList;let m=index;">
+                                                    <td>{{m+1}}</td>
+                                                    <td>{{leader.firstName}} {{leader.lastName}}</td>
+                                                    <td>{{leader.userType}}</td>
+                                                    <td>{{convertDateTime(leader.joiningDate)}}</td>
+                                                    <td>{{convertDateTime(leader.assignAt)}}</td>
+                                                    <td>{{leader.capacity}}</td>
+                                                    <td><a (click)="viewExperts(leader.userId,leader.userType)" class="viewexpert" *ngIf="userType == 'TM'">View Experts</a></td>
+                                                    <td>
+                                                        <a (click)="getUserDetailsById(leader.userId)" title="View Profile"><i class="fa-regular fa-eye"></i></a>
+                                                    </td>
+                                                </tr>
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="userType == 'TL'">
+                                <div class="col-sm-12">
+                                    <div class="top_left_heading">
+                                        <i class="fa-solid fa-list-check  light_green"></i> <span class="light_green"> Experts </span>
+                                    </div>
+                                    <div class="table_div">
+                                        <div class="table-responsive">
+                                            <table class="table account_db_tbl">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Sl No.</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Position</th>
+                                                        <th scope="col">Joining Date</th>
+                                                        <th scope="col">Assigned On</th>
+                                                        <th scope="col">Capacity</th>
+                                                        <th scope="col"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="color_white">
+                                                    <tr *ngFor="let item of expertList;let i=index;">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{item.firstName}} {{item.lastName}}</td>
+                                                        <td>{{item.userType}}</td>
+                                                        <td>{{convertDateTime(item.joiningDate)}}</td>
+                                                        <td>{{convertDateTime(item.assignAt)}}</td>
+                                                        <td>{{item.capacity}}</td>
+                                                        <td>
+                                                            <a (click)="viewExpertDetails(item.userId)" title="View Profile"><i class="fa-regular fa-eye"></i></a>
+                                                        </td>
+                                                    </tr>  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <span class="color_white">pagination...</span>
+                                    </div>
+                                                    
+                                        
+                                </div>
+                            </div>  
+
+                            <div class="row" *ngIf="userType == 'SSME' || userType == 'SME' || userType == 'JSME' || userType == 'ATL'">
+                                <div class="col-sm-12" *ngFor="let leader of leaderList;let e=index;">
+                                    <div class="profile_card">
+                                        <div class="accordion accordion-flush" id="team_profile">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" [id]="'flush-headingOne'+ e">
+                                                    <button class="accordion-button collapsed" [ngClass]="{ 'collapsed': e != 0 }" type="button"
+                                                        data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapseOne'+ e"
+                                                        aria-expanded="true" [attr.aria-controls]="'flush-collapseOne'+ e"  (click)="getExpertList(leader.tlUserId,leader.tlUserType)" >
+                                                        <div class="profile_header">
+                                                            <div class="profile_left">
+                                                                <div class="confirmation_user">
+                                                                    <img [src]="imgPath + leader.tlProfileImg" alt="Description of the image" *ngIf="leader.tlProfileImg">
+                                                                    <img src="assets/images/no-user.png" alt="" *ngIf="!leader.tlProfileImg">
+                                                                </div>
+                                                                <div class="profile_info">
+                                                                    <h2>{{leader.tlName}}</h2>
+                                                                    <span style="color: var(--lightGreen);font-size: larger;" *ngIf="leader.tlUserType == 'TL'">Team Leader</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile_mid">  
+                                                                <h6 class="ms-2">Capacity : {{leader.tlCapacity}}</h6>    
+                                                                <h6 class="ms-2">Joining Date : {{convertDateTime(leader.tlJoiningDate)}}</h6>   
+                                                                <a (click)="getUserDetailsById(leader.userId)" title="View Profile"><i class="fa-regular fa-eye"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </h2>
+                                                <div [id]="'flush-collapseOne'+ e" class="accordion-collapse collapse"
+                                                [attr.aria-labelledby]="'flush-headingOne'+ e"
+                                                    data-bs-parent="#team_profile">
+                                                    <div class="accordion-body">
+                                                        <table class="table">
+                                                            <thead class="table-borderless">
+                                                            <tr>
+                                                                <th scope="col">Sl No.</th>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Position</th>
+                                                                <th scope="col">Joining Date</th>
+                                                                <th scope="col">Assigned On</th>
+                                                                <th scope="col">Capacity</th>
+                                                                <th scope="col"></th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let exp of expertList;let p=index;">
+                                                                    <td>{{p+1}}</td>
+                                                                    <td>{{exp.firstName}} {{exp.lastName}}</td>
+                                                                    <td>{{exp.userType}}</td>
+                                                                    <td>{{convertDateTime(exp.joiningDate)}}</td>
+                                                                    <td>{{convertDateTime(exp.assignAt)}}</td>
+                                                                    <td>{{exp.capacity}}</td>
+                                                                    <td>
+                                                                        <a (click)="getUserDetailsById(exp.userId)" title="View Profile"><i class="fa-regular fa-eye"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+            </ng-template>
+       
+    </main>
+</section>
+
+
+

@@ -1,0 +1,30 @@
+<section class="log_in splash_screen">
+    <div class="container">
+        <div class="form_top_area">
+            <a href="#"><img src="assets/images/main_white_logo.png" class="mb-3" alt="LOG IN LOGO" loading="lazy"></a>
+        </div>
+        <div class="form_area">
+            <h4 class="h4">login</h4>
+
+            <div class="mb-3 ">
+                <label for="staticEmail" class="col-form-label">Username</label>
+                <input type="text" class="form-control" id="userName" placeholder="Username" [(ngModel)]="userName" (keyup.enter)="login()">
+            </div>
+            <div class="mb-3">
+                <label for="inputPassword" class="col-form-label">Password</label>
+                <div class="eye_hide_show">
+                    <input type="password" name="password" class="form-control" id="inputPassword" [(ngModel)]="password" (keyup.enter)="login()" placeholder="Password">
+                    <span toggle="#inputPassword" id="passview" class="fa-solid fa-eye-slash toggle-password" (click)="passwordShowHide()"></span>
+                </div>
+            </div>
+            <input type="submit" class="btn1 mb-3" value="SUBMIT" (click)="login()">
+            <div class="password_change_area">
+                <!-- <a routerLink="forgot-password" class="pass_word">forgot your password ?</a> -->
+                <!-- <p>Contact the Admin to <a routerLink="reset-password" class="pass_word set_password">reset your Password
+                        ?</a></p> -->
+            </div>
+
+        </div>
+    </div>
+
+</section>

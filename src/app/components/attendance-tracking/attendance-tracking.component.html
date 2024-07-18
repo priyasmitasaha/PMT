@@ -1,0 +1,137 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+              <div class="page_heading">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="top_left_heading">
+                        <i class="fa-solid fa-list-check  light_green"></i> <span class="light_green"> Attendance Tracking</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <ul class="top_left_heading_ul">
+                            <li>
+                                <mat-form-field>
+                                    <mat-date-range-input [rangePicker]="picker">
+                                      <input matStartDate placeholder="Start date" [(ngModel)]="startDate" (dateChange)="startDateChanged($event)">
+                                      <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="endDateChanged($event)">
+                                    </mat-date-range-input>
+                                    
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #picker></mat-date-range-picker>
+                                  </mat-form-field>
+                                  <button (click)="getAttendanceTrackingList()" class="srch_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+               
+                <div class="my_leads_page" style="color: white;" *ngIf="isHidden">
+                    <div class="multi_color_row">
+                      <div class="row">
+                        <!-- <div class="col-md-3">
+                          <select>
+                            <option value="">Select Position</option>
+                          </select>
+                         </div> -->
+                       
+                      </div>
+                    </div>
+                   
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tr class="table_blue_head">
+                              <th scope="col" style="border-radius: 4px 0 0 4px;">Date</th>
+                              <th scope="col">First In</th>
+                              <th scope="col">Last Out</th>
+                              <th scope="col">Total Working Houres</th>
+                              <th scope="col" style="border-radius: 0  4px 4px 0;">Status</th>
+                            </tr>
+                            <tbody style="color: white;font-weight: 400;border-top: none;">
+                              <tr>
+                                <!-- <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"></td> -->
+                                <td>26-09-23</td>
+                                <td>10.05.00  AM</td>
+                                <td>7.30.03  PM</td>
+                                <td>9:35:03  hrs</td>
+                                <td>Active</td>                        
+                              </tr>
+                              <tr>
+                                <!-- <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"></td> -->
+                                <td>26-09-23</td>
+                                <td>10.05.00  AM</td>
+                                <td>7.30.03  PM</td>
+                                <td>9:35:03  hrs</td>
+                                <td>Active</td>                        
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="mt-4">
+                          <ul class="white_btns_ul">
+                            <li><a href="#" class="white_btn"><img src="assets/images/filter.png" alt="" loading="lazy"> Filter</a></li>
+                            <li><a href="#" class="white_btn"><img src="assets/images/black_sort.png" alt="" loading="lazy"> Sort</a></li>
+                          </ul>
+                        </div>
+                </div>
+
+                    <!------------------- for Expert  logged in ---------------------->
+                <div class="my_leads_page" *ngIf="isExpert">
+                  <div class="multi_color_row">
+                    <div class="row">
+                     
+                     
+                     
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tr class="table_blue_head">
+                        <th scope="col" style="border-radius: 4px 0 0 4px;">Date</th>
+                        <th scope="col">First In</th>
+                        <th scope="col">Last Out</th>
+                        <th scope="col">Total Working Houres</th>
+                        <th scope="col" style="border-radius: 0  4px 4px 0;">Status</th>
+                      </tr>
+                      <tbody style="font-weight: 400;border-top: none;">
+                        <tr>
+                          <!-- <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"></td> -->
+                          <td>26-09-23</td>
+                          <td>10.05.00  AM</td>
+                          <td>7.30.03  PM</td>
+                          <td>9:35:03  hrs</td>
+                          <td>Active</td>                        
+                        </tr>
+                        <tr>
+                          <!-- <td> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"></td> -->
+                          <td>26-09-23</td>
+                          <td>10.05.00  AM</td>
+                          <td>7.30.03  PM</td>
+                          <td>9:35:03  hrs</td>
+                          <td>Active</td>                        
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="mt-4">
+                    <ul class="white_btns_ul">
+                      <li><a href="#" class="white_btn"><img src="assets/images/filter.png" alt="" loading="lazy"> Filter</a></li>
+                      <li><a href="#" class="white_btn"><img src="assets/images/black_sort.png" alt="" loading="lazy"> Sort</a></li>
+                    </ul>
+                  </div>
+              </div>
+            </div>
+        </section>
+
+    </main>
+</section>
+
+

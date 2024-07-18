@@ -1,0 +1,166 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="task_confirmation_area">
+              
+                <div class="container">
+                        <div class="confirmation_user">
+                            <img src="assets/images/no-user.png" alt="" *ngIf="!img">
+                            <img [src]="imgPath + img"  *ngIf="img">
+
+                            <div class="choose_file_div">
+                                <div class="camera_div">
+                                    <input type="file"  name="profileimg" id="profileimg" (change)="profileUpload()">
+                                    <i class="fa-solid fa-camera"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4 mt-2">
+                            <div class="col-sm-6">
+                                <div class="input_group">
+                                    <label for="firstName">First Name <span>*</span></label>
+                                    <input type="text" id="firstName" class="form-control" [(ngModel)]="firstName">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input_group">
+                                    <label for="lastName">Last Name <span>*</span></label>
+                                    <input type="text" id="lastName" class="form-control" [(ngModel)]="lastName">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input_group">
+                                    <label for="contactNumber">Contact Number <span>*</span></label>
+                                    <input type="text" id="contactNumber" class="form-control" [(ngModel)]="contactNumber"  onkeypress="if(this.value.length >9) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input_group">
+                                    <label for="altNumber">Alternative Number</label>
+                                    <input type="text" id="altNumber" class="form-control" [(ngModel)]="altNumber"  onkeypress="if(this.value.length >9) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input_group">
+                                    <label for="alt_number">Email <span>*</span></label>
+                                    <input type="email" id="email" class="form-control" [(ngModel)]="email">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="input_group">
+                                    <label for="address">Address <span>*</span></label>
+                                    <textarea id="address" class="form-control" rows="3" [(ngModel)]="address"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="pin_code">Pin Code <span>*</span></label>
+                                    <input type="text" id="pinCode" class="form-control" [(ngModel)]="pinCode"  onkeypress="if(this.value.length >5) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="state">State <span>*</span></label>
+                                    <select id="state" class="form-control" [(ngModel)]="state" style="appearance: auto;">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let item of stateList" [value]="item.stateId">{{item.stateName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="joining_date">Joining Date <span>*</span></label>
+                                    <input type="date" id="joining_date" class="form-control" [max]="maxDate"
+                                    [(ngModel)]="joining_date" (change)="getExperience();">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="experience">Experience </label>
+                                    <input type="text" id="experience" class="form-control"
+                                    [(ngModel)]="experience"  readonly>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="experience">Username <span>*</span></label>
+                                    <input type="text" id="username" class="form-control"
+                                    [(ngModel)]="userName">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group eye_hide_show">
+                                    <label for="inputPassword">Password <span>*</span></label>
+                                    <input type="password" name="password" class="form-control" id="inputPassword" [(ngModel)]="password" placeholder="Password">
+                                    <span toggle="#inputPassword" id="passview" class="fa-solid fa-eye-slash toggle-password" (click)="passwordShowHide()" style="top: 75% !important;"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input_group">
+                                    <label for="position">Position <span>*</span></label>
+                                    <select id="position" class="form-control" [(ngModel)]="position" (change)="assign();">
+                                        <option [value]="">Select</option>
+                                        <option *ngFor="let item of positionList" [value]="item.value">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" *ngIf="isVisible">
+                                <div class="input_group">
+                                    <label for="position">Assign To </label>
+                                    <select id="assignTo" class="form-control" [(ngModel)]="assignTo">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let item of userList" [value]="item.userId">{{item.firstName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3" *ngIf="isShift">
+                                <div class="input_group">
+                                    <label for="position">Shift To </label>
+                                    <select id="assignTo" class="form-control" [(ngModel)]="shiftName">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let item of userList" [value]="item.userId">{{item.firstName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-3" *ngIf="isCapacity">
+                                <div class="input_group">
+                                    <label for="position">Capacity <span>*</span></label>
+                                    <input type="text" id="capacity" class="form-control"
+                                    [(ngModel)]="capacity"  onkeypress="if(this.value.length >9) return false; if(event.which < 48 || event.which > 57 ) if(event.which != 8) if(event.keyCode != 9)  return false;" [readonly]="isReadOnly">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="input_group">
+                                    <label for="education">Educational Background <span>*</span></label>
+                                    <textarea id="education_background" class="form-control" rows="3" [(ngModel)]="education_background"></textarea>
+                                </div>
+                            </div>
+                          
+                            <div class="col-sm-12">
+                                <div class="input_group">
+                                    <label for="expertise">Expertise <span>*</span></label>
+                                    <textarea id="expertise" class="form-control" rows="3" [(ngModel)]="expertise"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-3">
+                                <button type="submit" class="btn1 mt-3" (click)="createProfile()"> create profile</button>
+                            </div>
+                        </div>
+                  
+                </div>
+            </div>
+        </section>
+    </main>
+</section>
+
+
+

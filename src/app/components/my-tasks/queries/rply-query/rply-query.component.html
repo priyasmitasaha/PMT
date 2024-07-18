@@ -1,0 +1,76 @@
+<section id="wrapper">
+    <main class="main_content">
+        <app-header></app-header>
+
+
+        <section class="page_content">
+            <div class="container">
+                <div class="page_heading">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="top_left_heading">
+                                <i class="fa-solid fa-business-time  light_green"></i> 
+                                <span class="light_green"> query  of TASK ID {{taskId}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                        <div class="new_query_div mb-3">
+                            <h4 class="inbox_heading">Reply query </h4>
+                        </div>
+                        <div  class="query_extension_form mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-label">task id</label>
+                                    <input class="form-control" type="text" [(ngModel)]="taskId" readonly>
+                                </div> 
+                                <div class="col-md-12">
+                                    <label class="form-label mt-4">Solution</label>
+                                    <textarea  class="form-control" rows="7" [(ngModel)]="solution" placeholder="Type your query..." style="background: #06576d;color: white;"></textarea>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="upload_area" style="position: relative !important;margin-top: 32px;">
+                                        <input type="file" style="position: relative !important;width: 47%;z-index: 1;opacity: 0;" name="files[]" id="taskImg" (change)="queryfileUpload($event)" multiple>
+                                        <label for="taskImg" class="custom_btn task_confirmation_box"><i class="fa-solid fa-upload"></i> Upload</label>
+                                    </div>
+                                </div>
+                                <div class="thumbnail_img_area">
+                                    <div class="thumbnail_item"  *ngFor="let item of queryDocAll;let i=index;">
+                                        <div class="img_thumbnails">
+                                            <img class="assignImg"
+                                            [src]="item.includes('.pdf') ? 'assets/images/pdf.webp': item.includes('.xlsx') || item.includes('.xls')? 'assets/images/xlsx.png' : item.includes('.png') || item.includes('.jpg') || item.includes('.webp') || item.includes('.jpeg') || item.includes('.svg') || item.includes('.CR2') ? filePath + item : 'assets/images/doc.jpg'"
+                                            alt="" loading="lazy" (click)="viewFile(item)"
+                                            style="cursor: pointer;position: relative;margin-top:32px;height: 82px !important; width: 82px !important; object-fit: cover !important;">
+                                            <span *ngIf="queryDocAll.length>0"  (click)="removeFile(i)"
+                                                class="fa-solid fa-xmark" style="position: absolute;right: -8px;
+        top: 26px;color: red;padding: 2px 4px;background: white;cursor: pointer;border-radius: 50%;">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <button type="submit" class="delivery_btn" (click)="rplyQuery()">submit </button>
+                        </div>                    
+                </div>
+            </div>
+        </section>
+    </main>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

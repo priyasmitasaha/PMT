@@ -1,0 +1,220 @@
+<section id="wrapper">
+    <main class="main_content">
+        <!-- header -->
+        <app-header></app-header>
+
+
+        <!-- Page Content -->
+        <section class="page_content">
+            <div class="container">
+               
+                <div class="my_leads_page">
+                    <div class="upload_area_btn mb-3">
+                        <a href="#" class="btn btn-outline-light">Request For Extension</a>
+                        <a href="#" class="btn btn-outline-light">Send Query</a>
+                    </div>
+                    <div class="projects_div">
+                        <div class="projects_div_heading">
+                            <h3>{{taskId}}</h3>
+                        </div>
+                        <div class="project_area">
+                          
+                                <div class="row align-items-center assignee_div mt-3 mb-2">
+                                    <div class="col-md-2">
+                                        <label for="">assignee :</label>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'Admin'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Project Manager'"
+                                            [settings]="dropdownProjectManagerSettings" [data]="projectManagerList" 
+                                            [(ngModel)]="projectmanagerarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'PM'">
+                                        <!-- <select class="form-select mt-3" aria-label="Default select example" [disabled]="this.userType =='SME' || this.userType =='SSME' || this.userType =='JSME' || this.userType =='ATL' || this.userType =='QA'"></select> -->
+                                        <ng-multiselect-dropdown [placeholder]="'Select Team Managers'"
+                                            [settings]="dropdownManagerSettings" [data]="teamManagerList" 
+                                            [(ngModel)]="teamManagerarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'TM'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Team Leaders'"
+                                            [settings]="dropdownTeamLeaderSettings" [data]="teamLeaderList" 
+                                            [(ngModel)]="teamLeaderarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'TM'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Quality Analyst'"
+                                            [settings]="dropdownQAnalystSettings" [data]="qualityAnalystList" 
+                                            [(ngModel)]="qualityAnalystarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="userType == 'TL'">
+                                        <ng-multiselect-dropdown [placeholder]="'Select Experts'"
+                                            [settings]="dropdownExpertsSettings" [data]="expertsList" 
+                                            [(ngModel)]="expertsarray">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                </div>
+                          
+                            <div class="task_description">
+                                <div class="row">
+                                    
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Due Date :</label>
+                                        <p>{{dueDate}}</p>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Assignment :</label>
+                                        <p>{{assignment}}</p>
+                                    </div>                                    
+                                    <div class="col-md-4 mt-2">
+                                        <label for="">Assignment Instruction :</label>
+                                        <p>{{assignmentInstruction}}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">Proposed Structure :</label>
+                                        <p>{{proposedStructure}}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">uploaded files :</label>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">docs link :</label>
+                                        <p *ngIf="isDocDiv"><a href="javascript:void(0);" target="_blank"> {{docsLink}} </a></p>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="docsLink" [readonly]="isReadOnly" *ngIf="isHidden"></textarea>
+                                    </div> 
+                                    <div class="col-sm-12">
+                                        <div class="upload_file_area mt-3" *ngIf="isHidden">
+                                           
+                                                <input type="file" name="" id="fileInput" name="files[]" (change)="fileUpload($event)" multiple>
+                                        
+                                                <label for="fileInput" id="fileLabel">
+                                                    <span>Drag and Drop Your Payment Details</span>
+                                                    <!-- <img src="assets/images/upload-big-arrow.png" alt=""> -->
+                                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                                    <br>
+                                                </label>    
+                                                <div class="upload_doc" style="position: relative;"
+                                                *ngFor="let item of fileDocAll;let i=index;">
+                                                <img class="assignImg"
+                                                    [src]="item.includes('.pdf') ? 'assets/images/pdf.webp': item.includes('.xlsx') || item.includes('.xls')? 'assets/images/xlsx.png' : item.includes('.png') || item.includes('.jpg') || item.includes('.webp') || item.includes('.jpeg') || item.includes('.svg') || item.includes('.CR2') ? filePath + item : 'assets/images/doc.jpg'"
+                                                    alt="" loading="lazy" (click)="viewFile(item)"
+                                                    style="cursor: pointer;position: relative;">
+                                                <span *ngIf="fileDocAll.length>0"  (click)="removeFile(i)"
+                                                    class="fa-solid fa-xmark" style="position: absolute;top: -6px;
+                                                    right: -3px;
+                                                    color: red;
+                                                    padding: 2px 4px;
+                                                    background: white;
+                                                    cursor: pointer;
+                                                    border-radius: 50%;"></span>
+                                            </div>                            
+                                        </div>
+                                    </div>                                        
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-3 mt-3"  *ngIf="isMark">
+                                        <button class="btn1">mark as completed</button>
+                                    </div>
+                                    <div class="col-3 mt-3" *ngIf="isAssign">
+                                        <button class="btn1 assign_btn" (click)="submitAssignee()">assign the task</button>
+                                    </div>
+                                </div>
+                                <div class="invite_box  mt-5">
+                                    <div class="invite_heading">
+                                        <h3 class="title">People</h3>
+                                        <p class="mb-0">My Collaborator :</p>
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#project_manager">
+                                                    Project Manager
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#team_manager">
+                                                    Team Manager
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#team_leader">
+                                                    Team Leader
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#quality_analyst">
+                                                    Quality Analyst
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+                                    <div class="invite_wrapper">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="project_manager">
+                                                <div class="invite_wrapper">
+                                                    <div class="tab_item">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img1.png" alt="">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>Ankur</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab_item">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img2.png" alt="">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>Souvik</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab_item">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img3.png" alt="">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>Sumedh</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab_item">
+                                                        <div class="tab_img">
+                                                            <img src="assets/images/tab-img4.png" alt="">
+                                                        </div>
+                                                        <div class="tab_info">
+                                                            <h4>Akash</h4>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="team_manager">
+                                                Team Manager
+                                            </div>
+                                            <div class="tab-pane fade" id="team_leader">
+                                                Team Leader
+                                            </div>
+                                            <div class="tab-pane fade" id="quality_analyst">
+                                                Quality Analyst
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                
+            </div>
+        </section>
+    </main>
+</section>
+
+
+
+<!--------------- for rework,redo & resit projects -------------->
+
+                

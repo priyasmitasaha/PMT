@@ -1,0 +1,87 @@
+<!-- header -->
+<header class="header sticky-top ">
+    <div class="header_left">
+        <!-- <div class="menu_bar">
+            <div class="line"></div>
+        </div> -->
+
+        <button class="openbtn" id="showMenu" onclick="openNav()">☰</button>
+        <span class="go_back" (click)="goBack()" *ngIf="pageName != 'home'"><i class="fa-solid fa-left-long"></i></span>
+        <button class="offcanvas_btn " type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="home_tab">
+            <img src="assets/images/home.png" alt="">
+            <span>{{pagename }}</span>
+        </div>
+    </div>
+    <div class="header_right">
+        <div class="header_search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search...">
+        </div>
+        <!-- <div class="admin_area">
+            <div class="admin_icon">
+                <img src="assets/images/user_icon.png" alt="">
+            </div>
+            <div class="admin_title">
+                <span><a (click)="logout()">Logout</a></span>
+            </div>
+        </div> -->
+
+
+        <ul class="right_side">
+            <!-- <li><a class="bell_icon"><i class="fa-regular fa-bell"></i><span>1</span></a></li> -->
+            <li>
+                <a onclick="threeDots()" id="threeDotsButton"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                <ul class="three_dots_box" id="threeDotsMenu">
+                    <li class="profile_info" style="align-items:center !important;">
+                        <img src="assets/images/no-user.png" alt="">
+                        <strong>{{loginName}}</strong>
+                    </li>
+                    <li style="cursor: pointer;">
+                        <span onclick="password_change_box()">password change <i
+                                class="fa-solid fa-key"></i></span>
+                        <div class="password_div" id="passwordBox">
+                            <div class="mb-1">
+                                <label id="inputPassword1" class="form-label">old password</label>
+                                <input type="password" class="form-control" id="inputPassword1">
+                            </div>
+                            <div class="mb-1">
+                                <label id="inputPassword2" class="form-label">new password</label>
+                                <input type="password" class="form-control" id="inputPassword2">
+                            </div>
+                            <div class="mb-2">
+                                <label id="inputPassword3" class="form-label">confirm password</label>
+                                <input type="password" class="form-control" id="inputPassword3">
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="button" class=" request_btn">request for change</button>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <!-- <li class="mode_change_li" style="cursor: pointer;">
+                        <span>change mode : </span>
+                        <div>
+                            <input type="checkbox" class="checkbox" id="checkbox" (change)="toggleMode($event)" [(ngModel)]="modeType">
+                            <label for="checkbox" class="checkbox-label">
+                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-sun"></i>
+                                <span class="ball"></span>
+                            </label>
+                        </div>
+                    </li> -->
+
+                    <li>
+                        <p class="logout_btn mb-0" (click)="logout()">log out <i
+                                class="fa-solid fa-person-running"></i></p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
