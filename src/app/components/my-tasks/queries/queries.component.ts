@@ -156,7 +156,7 @@ export class QueriesComponent {
   }
 
   getQuery(type: any){
-    
+    console.log(type);
     if(type == 'solved'){
       this.getQueries(type);
       this.isDropdownDisabled = true;
